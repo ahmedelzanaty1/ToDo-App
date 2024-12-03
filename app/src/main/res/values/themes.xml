@@ -16,4 +16,7 @@
     <style name ="main_bg">
         <item name="android:background">@color/main_bg_light</item>
     </style>
+    <style name ="nav_bg">
+        <item name="android:background">@color/white</item>
+    </style>
 </resources>
