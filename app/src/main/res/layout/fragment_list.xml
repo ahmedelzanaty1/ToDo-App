@@ -6,13 +6,33 @@
     style="@style/main_bg"
     android:layout_height="match_parent"
     tools:context=".Fragments.ListFragment">
+    <Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent=".1"
+        android:id="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/blue"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="22sp"
+        android:id="@+id/tv"
+        style="@style/tv_bg"
+        android:padding="5dp"
+        android:text="To Do List"/>
+    <com.kizitonwose.calendar.view.WeekCalendarView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/toolbar"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:cv_scrollPaged="true"
+        app:cv_daySize="freeForm"
+        android:id="@+id/calender_view"
+        app:cv_dayViewResource="@layout/calender_view_day"
+        />
 
-   <TextView
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:text="list fragment"
-       android:textSize="25sp"
-       app:layout_constraintTop_toTopOf="parent"
-       app:layout_constraintStart_toStartOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
