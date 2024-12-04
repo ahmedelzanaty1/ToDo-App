@@ -10,7 +10,7 @@
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/main_bg_light</item>
+        <item name="android:statusBarColor">#949594</item>
         <!-- Customize your theme here. -->
     </style>
     <style name ="main_bg">
@@ -18,5 +18,14 @@
     </style>
     <style name ="nav_bg">
         <item name="android:background">@color/white</item>
+    </style>
+    <style name="tv_bg">
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="day_bg">
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="box_bg">
+        <item name="android:background">@drawable/calender_box</item>
     </style>
 </resources>

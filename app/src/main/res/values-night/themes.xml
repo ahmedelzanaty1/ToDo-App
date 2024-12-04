@@ -19,4 +19,13 @@
     <style name ="nav_bg">
         <item name="android:background">@color/black2</item>
     </style>
+    <style name="tv_bg">
+        <item name="android:textColor">@color/black2</item>
+    </style>
+    <style name="day_bg">
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="box_bg">
+        <item name="android:background">@drawable/calender_box_night</item>
+    </style>
 </resources>

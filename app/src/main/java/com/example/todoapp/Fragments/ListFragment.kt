@@ -1,60 +1,71 @@
 package com.example.todoapp.Fragments
 
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.todoapp.R
+import com.example.todoapp.Calender.CalenderViewHolder
+import com.example.todoapp.databinding.CalenderViewDayBinding
+import com.example.todoapp.databinding.FragmentListBinding
+import com.kizitonwose.calendar.core.WeekDay
+import com.kizitonwose.calendar.core.atStartOfMonth
+import com.kizitonwose.calendar.core.firstDayOfWeekFromLocale
+import com.kizitonwose.calendar.view.WeekDayBinder
+import java.time.LocalDate
+import java.time.YearMonth
+import java.time.format.TextStyle
+import java.util.Locale
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ListFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ListFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    lateinit var binding: FragmentListBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list, container, false)
+        binding = FragmentListBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ListFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ListFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        calenderview()
+
+    }
+    fun calenderview() {
+
+        val currentDate = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            LocalDate.now()
+        } else {
+            TODO("VERSION.SDK_INT < O")
+        }
+        val currentMonth = YearMonth.now()
+        val startDate = currentMonth.minusMonths(100).atStartOfMonth()
+        val endDate = currentMonth.plusMonths(100).atEndOfMonth()
+        val firstDayOfWeek = firstDayOfWeekFromLocale()
+        binding.calenderView.setup(startDate, endDate, firstDayOfWeek)
+        binding.calenderView.scrollToWeek(currentDate)
+        binding.calenderView.dayBinder = object : WeekDayBinder<CalenderViewHolder> {
+            override fun bind(container: CalenderViewHolder, data: WeekDay) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    container.dayname.text = data.date.dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.getDefault())
+                    container.daynumber.text = data.date.dayOfMonth.toString()
                 }
             }
+
+            override fun create(view: View): CalenderViewHolder {
+                val binding = CalenderViewDayBinding.bind(view)
+                return CalenderViewHolder(binding)
+            }
+        }
     }
+
+
+
+
+
+
 }
