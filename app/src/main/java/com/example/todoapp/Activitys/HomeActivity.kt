@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
+import com.example.todoapp.FloatingActionButton.AddTask
 import com.example.todoapp.Fragments.ListFragment
 import com.example.todoapp.Fragments.SettingFragment
 import com.example.todoapp.R
@@ -25,11 +26,19 @@ class HomeActivity : AppCompatActivity() {
             return@setOnItemSelectedListener true
         }
         binding.bottomAppBar.selectedItemId = R.id.list_ic
+        floatingbutton()
 
 
     }
     fun pushfragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().replace(binding.fragments.id, fragment).commit()
+    }
+    fun floatingbutton(){
+        binding.fab.setOnClickListener {
+            val float = AddTask()
+            float.show(supportFragmentManager,"")
+
+        }
     }
 
 }

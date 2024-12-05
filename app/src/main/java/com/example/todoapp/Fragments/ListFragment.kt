@@ -6,7 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.room.RoomDatabase
 import com.example.todoapp.Calender.CalenderViewHolder
+import com.example.todoapp.DataBase.TaskDataBase
+import com.example.todoapp.adapters.TasksAdapter
 import com.example.todoapp.databinding.CalenderViewDayBinding
 import com.example.todoapp.databinding.FragmentListBinding
 import com.kizitonwose.calendar.core.WeekDay
@@ -21,6 +24,8 @@ import java.util.Locale
 
 class ListFragment : Fragment() {
     lateinit var binding: FragmentListBinding
+    lateinit var adapter: TasksAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +38,7 @@ class ListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         calenderview()
+        getalltask()
 
     }
     fun calenderview() {
@@ -62,6 +68,12 @@ class ListFragment : Fragment() {
             }
         }
     }
+    fun getalltask(){
+        adapter = TasksAdapter(TaskDataBase.getDatabase(requireContext()).getdao().getalltasks())
+        binding.recycler.adapter = adapter
+
+    }
+
 
 
 
