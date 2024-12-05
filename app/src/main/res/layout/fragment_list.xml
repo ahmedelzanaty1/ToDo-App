@@ -33,6 +33,14 @@
         android:id="@+id/calender_view"
         app:cv_dayViewResource="@layout/calender_view_day"
         />
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recycler"
+        tools:listitem="@layout/task_recyclerview"
+        app:layout_constraintTop_toBottomOf="@id/calender_view"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

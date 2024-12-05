@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    style="@style/nav_bg"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_add"
+        android:text="add new task"
+        android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="4dp"
+        style="@style/day_bg"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/title_text"
+        android:hint="add new task "
+        style="@style/day_bg"
+        app:layout_constraintTop_toBottomOf="@id/tv_add"
+        android:padding="4dp"
+        android:layout_margin="8dp"
+        />
+    <EditText
+        style="@style/day_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/description_text"
+        android:hint="add task description... "
+        android:maxLines="5"
+        app:layout_constraintTop_toBottomOf="@id/title_text"
+        android:padding="4dp"
+        android:layout_margin="8dp"
+        />
+    <TextView
+        style="@style/day_bg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pick_date"
+        android:text="select date and time"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@id/description_text"
+        android:padding="5dp"
+        android:layout_margin="10dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/date_value"
+        tools:text="10/5/24 \ 10:30 AM"
+        app:layout_constraintTop_toTopOf="@id/pick_date"
+        app:layout_constraintBottom_toBottomOf="@id/pick_date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/add_task_btn"
+        app:layout_constraintTop_toBottomOf="@id/date_value"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:backgroundTint="@color/blue"
+        android:textColor="@color/white"
+        android:text="add task"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
