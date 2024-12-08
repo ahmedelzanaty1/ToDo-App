@@ -1,6 +1,7 @@
 
 package com.example.todoapp.Fragments
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -9,15 +10,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.lifecycleScope
+import androidx.room.Dao
 import com.example.todoapp.Calender.CalenderViewHolder
+import com.example.todoapp.Dao.TaskDao
 import com.example.todoapp.DataBase.TaskDataBase
+import com.example.todoapp.Model.Task
 import com.example.todoapp.adapters.TasksAdapter
 import com.example.todoapp.databinding.CalenderViewDayBinding
 import com.example.todoapp.databinding.FragmentListBinding
+import com.example.todoapp.pack_interface.OnClickListener
 import com.kizitonwose.calendar.core.WeekDay
 import com.kizitonwose.calendar.core.atStartOfMonth
 import com.kizitonwose.calendar.core.firstDayOfWeekFromLocale
 import com.kizitonwose.calendar.view.WeekDayBinder
+import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.TextStyle
@@ -56,6 +63,7 @@ class ListFragment : Fragment() {
         binding.calenderView.setup(startDate, endDate, firstDayOfWeek)
         binding.calenderView.scrollToWeek(currentDate)
         binding.calenderView.dayBinder = object : WeekDayBinder<CalenderViewHolder> {
+            @SuppressLint("SuspiciousIndentation")
             override fun bind(container: CalenderViewHolder, data: WeekDay) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
@@ -76,6 +84,13 @@ class ListFragment : Fragment() {
     fun getalltask() {
         adapter = TasksAdapter(TaskDataBase.getDatabase(requireContext()).getdao().getalltasks())
         binding.recycler.adapter = adapter
+        adapter.onClickListener = object : OnClickListener{
+            override fun onclick(position: Int, task: Task) {
+                task.isCompleted = true
+                TaskDataBase.getDatabase(requireContext()).getdao().updatetask(task)
+
+            }
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

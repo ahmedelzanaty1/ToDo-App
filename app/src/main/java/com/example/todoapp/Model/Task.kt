@@ -10,6 +10,6 @@ data class Task(
     val id: Int? = null,
     val title: String? = null,
     val description: String? = null,
-    val isCompleted: Boolean? = null,
+    var isCompleted: Boolean? = null,
     val date : Date? = null
 )
